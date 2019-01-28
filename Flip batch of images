@@ -19,3 +19,23 @@ list = getFileList(input);
 for (i = 0; i < list.length; i++)
         action(input, output, list[i]);
 setBatchMode(false);
+
+Need to flip images horizontally? Look no further.
+
+
+function action(input, output, filename) {
+	 open(input + filename);
+	 filename = getTitle();
+	 run("Flip Horizontally", "stack");
+	 run("Save");
+	 close();
+}
+
+input = getDirectory("choose input folder");
+output = getDirectory("choose output folder");
+
+setBatchMode(true); 
+list = getFileList(input);
+for (i = 0; i < list.length; i++)
+        action(input, output, list[i]);
+setBatchMode(false);
