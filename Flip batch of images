@@ -1,0 +1,21 @@
+# ImageJ-Macros
+Macros written to automate image processing tasks
+Language: IJM
+This macro, when run, asks you to select an input folder and output folder (choose the same folder as input folder to return to same directory), then flips all images in the input folder vertically in ImageJ.
+
+function action(input, output, filename) {
+	 open(input + filename);
+	 filename = getTitle();
+	 run("Flip Vertically", "stack");
+	 run("Save");
+	 close();
+}
+
+input = getDirectory("choose input folder");
+output = getDirectory("choose output folder");
+
+setBatchMode(true); 
+list = getFileList(input);
+for (i = 0; i < list.length; i++)
+        action(input, output, list[i]);
+setBatchMode(false);
