@@ -1,0 +1,44 @@
+# ImageJ-Macros
+Macros written to automate image processing tasks
+This macro was written to produce figure images with merged color channels, a canvas size according to my liking (for aesthetics) and added scale bar.
+The following merged images are produced: tracer+DAPI and GFAP+AQ4. 
+
+function action(input, output, filename) {
+	 open(input + filename);
+	 filename = getTitle();
+	 run("Canvas Size...", "width=5904 height=3277 position=Center");
+	 run("Split Channels");
+		selectWindow("C1-" + filename);
+		saveAs("tiff", output + "GFAP" + "-" + filename);
+		selectWindow("C2-" + filename);
+		saveAs("tiff", output + "tracer" + "-" + filename);
+		selectWindow("C3-" + filename);
+        saveAs("tiff", output + "AQ4" + "-" + filename);
+        selectWindow("C4-" + filename);
+  		saveAs("tiff", output + "DAPI" + "-" + filename);
+		ch4 = "DAPI" + "-" + filename;
+		ch3 = "AQ4" + "-" + filename;
+		ch1 = "GFAP" + "-" + filename;
+		ch2 = "tracer" + "-" + filename;
+		run("Merge Channels...", "c3="+ ch4 +" c6="+ ch2 +" create keep");
+		run("Scale Bar...", "width=5000 height=200 font=0 color=White background=None location=[Lower Right] bold hide overlay label");
+		saveAs("PNG", output + filename + "-" + "tracer+DAPI");
+		close();
+		selectWindow("GFAP" + "-" + filename);
+		run("Brightness/Contrast...");
+		resetMinAndMax();
+		run("Merge Channels...", "c2="+ ch3 +" c1="+ ch1 +" create keep");
+		run("Scale Bar...", "width=5000 height=200 font=0 color=White background=None location=[Lower Right] bold hide overlay label");
+		saveAs("PNG", output + filename + "-" + "GFAP+AQ4");
+	 	close();
+	 	close();
+}
+
+input = getDirectory("Choose input");
+output = getDirectory("Choose output");
+
+setBatchMode(true); 
+list = getFileList(input);
+for (i = 0; i < list.length; i++)
+        action(input, output, list[i]);
+setBatchMode(false);
