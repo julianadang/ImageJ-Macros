@@ -1,0 +1,19 @@
+# ImageJ-Macros
+Macros written to automate image processing tasks
+Tired of .tif images because they come with all the metadata and you just want to make nice presentation figures? Or want to have an easy-to-load overview of your microscope images for qualitative analysis? .png files are smaller, and thus easier to work with if your PC is slow. If you wish to save as other file types, simply exchange "PNG" with "TIF" if you want to create .tif files or whatever you desire.
+
+function action(input, output, filename) {
+	 open(input + filename);
+	 filename = getTitle();
+	 saveAs("PNG", output + filename);
+	 close();
+}
+
+input = getDirectory("Choose input");
+output = getDirectory("Choose output");
+
+setBatchMode(true); 
+list = getFileList(input);
+for (i = 0; i < list.length; i++)
+        action(input, output, list[i]);
+setBatchMode(false);
