@@ -1,0 +1,39 @@
+This one looks complex but works like a charm. You have X slices in your multichannel images and want to save every single of them as a separate .tiff file. The files are saved with the suffix "-X" where X is the position of the channel (0 being the first channel).
+
+oneFilePerSlice = true;
+
+directory = getDirectory("Choose input folder");
+fileList = getFileList(directory);
+outputDirectory = getDirectory("Choose output folder");
+
+run("Bio-Formats Macro Extensions");
+setBatchMode(true);
+
+for (i=0; i<fileList.length; i++) {
+  file = directory + fileList[i];
+  if (oneFilePerSlice) {
+    Ext.setId(file);
+    Ext.getImageCount(imageCount);
+
+    for (image=0; image<imageCount; image++) {
+      Ext.openImage("", image);
+      outFile = outputDirectory + fileList[i] + "-" + image + ".tiff";
+      saveFile(outFile);
+      close();
+    }
+    Ext.close();
+  }
+  else {
+    Ext.openImagePlus(file);
+    outFile = outputDirectory + fileList[i] + ".tiff";
+    saveFile(outFile);
+    close();
+  }
+}
+
+showStatus("Finished.");
+setBatchMode(false);
+
+function saveFile(outFile) {
+   run("Bio-Formats Exporter", "save=[" + outFile + "] compression=Uncompressed");
+}
