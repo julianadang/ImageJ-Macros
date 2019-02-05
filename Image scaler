@@ -1,8 +1,9 @@
-# ImageJ-Macros
-Macros written to automate image processing tasks
-As an exmaple, the scale factor is set to 0.0625 - change this to your liking. The output images are saved as .tiff files and with the added suffix "-scaled"
+//ImageJ-Macros
+//Macros written to automate image processing tasks
+//As an exmaple, the scale factor is set to 0.0625 - change this to your liking
+//The output images are saved as .tiff files and with the added suffix "-scaled"
 
-function action(input, output, filename) {
+function scalebyfactor(input, output, filename) {
 	 open(input + filename);
 	 filename = getTitle();
 	 Scale_factor = 0.0625;
@@ -19,5 +20,5 @@ output = getDirectory("Choose output folder");
 setBatchMode(true); 
 list = getFileList(input);
 for (i = 0; i < list.length; i++)
-        action(input, output, list[i]);
+        scalebyfactor(input, output, list[i]);
 setBatchMode(false);
