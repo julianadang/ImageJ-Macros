@@ -1,7 +1,10 @@
-# ImageJ-Macros
-Macros written to automate image processing tasks
-This macro was written to produce figure images with merged color channels, a canvas size according to my liking (for aesthetics) and added scale bar.
-The following merged images are produced: tracer+DAPI and GFAP+AQ4. 
+//ImageJ-Macros
+//Macros written to automate image processing tasks used on batches of images
+//This macro was written to produce figure images with merged color channels, a canvas size
+//and added scale bar with dimensions to my liking (for aesthetics)
+//from images with four channels (tracer, DAPI, GFAP and AQ4), two channels are pairwised merged to produce: tracer+DAPI and GFAP+AQ4.
+//note that for GFAP, contrast is optimized.
+//This processing is run for batches of images (the entirety of images in a folder) with a single click.
 
 function action(input, output, filename) {
 	 open(input + filename);
