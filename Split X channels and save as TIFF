@@ -1,4 +1,6 @@
-This one looks complex but works like a charm. You have X slices in your multichannel images and want to save every single of them as a separate .tiff file. The files are saved with the suffix "-X" where X is the position of the channel (0 being the first channel).
+//This one looks complex but works like a charm
+//You have X slices in your multichannel images and want to save every single of them as a separate .tiff file
+//The files are saved with the suffix "-X" where X is the position of the channel (0 being the first channel)
 
 oneFilePerSlice = true;
 
