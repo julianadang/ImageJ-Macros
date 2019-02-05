@@ -6,7 +6,7 @@
 //note that for GFAP, contrast is optimized.
 //This processing is run for batches of images (the entirety of images in a folder) with a single click.
 
-function action(input, output, filename) {
+function CanvasMergeScalebarSaveAs(input, output, filename) {
 	 open(input + filename);
 	 filename = getTitle();
 	 run("Canvas Size...", "width=5904 height=3277 position=Center");
@@ -43,5 +43,5 @@ output = getDirectory("Choose output");
 setBatchMode(true); 
 list = getFileList(input);
 for (i = 0; i < list.length; i++)
-        action(input, output, list[i]);
+        CanvasMergeScalebarSaveAs(input, output, list[i]);
 setBatchMode(false);
